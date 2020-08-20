@@ -1,14 +1,14 @@
-Mover mover = new Mover();
-
-
+Mover move = new Mover();
 
 void setup() {
   size(800, 800);
   frameRate(60);
 }
 
+
 void draw() {
-  mover.update();
-  mover.checkEdges();
-  mover.display();
+  background(255);
+  move.mover();
+  move.checkEdges();
+  move.display();
 }

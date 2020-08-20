@@ -1,14 +1,16 @@
 class Mover {
-  PVector location ;
-  PVector velocity;
-  PVector acceleration;
+  PVector location = new PVector(10,10);
+  PVector velocity = new PVector(1, 0);
+  PVector acceleration = new PVector(0, 1);
   float mass;
 
 
+  void applyForce(PVector force) {
+       PVector f = PVector.div(force,mass);
+    acceleration.add(f);
+  }
 
-
-
-  void update() {
+  void mover() {
     velocity.add(acceleration);
     location.add(velocity);
     acceleration.mult(0);
@@ -29,7 +31,7 @@ class Mover {
 
   void display() {
     noStroke(); 
-    fill(0); 
-    ellipse(location.x, location.y, mass*3, mass*3);
+    fill(100, 100, 100); 
+    ellipse(location.x, location.y, 20, 20);
   }
 }
