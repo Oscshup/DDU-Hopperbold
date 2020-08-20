@@ -3,17 +3,16 @@ class Mover {
   PVector velocity;
   PVector acceleration;
   float mass = 10;
-  
+
   Mover(float m, float x, float y) {
     mass = m;
-    location = new PVector(x,y);
-    velocity = new PVector(0,0);
-    acceleration = new PVector(0,0);
-    
+    location = new PVector(x, y);
+    velocity = new PVector(0, 0);
+    acceleration = new PVector(0, 0);
   }
 
   void applyForce(PVector force) {
-       PVector f = PVector.div(force,mass);
+    PVector f = PVector.div(force, mass);
     acceleration.add(f);
   }
 
