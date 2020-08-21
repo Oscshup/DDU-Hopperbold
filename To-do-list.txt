@@ -1,23 +1,23 @@
 Vi har 7 timer at lave Jumpball.
 
 user stories
-Der skal være en bold som skal kunne hoppe. Derefter skal bolden reflektere på kanterne.
-Det skal være muligt at lave flere bolde og de skal ramme hinanden. Background skal være en landskab, hvor jorden skal være ujævnt.
-Udover det skal man kunne starte spillet forfra.
+a.)Der skal være en bold som skal kunne hoppe. Derefter skal bolden reflektere på kanterne.
+b.)Det skal være muligt at lave flere bolde og de skal ramme hinanden. Background skal være en landskab, hvor jorden skal være ujævnt.
+c.)Udover det skal man kunne starte spillet forfra.
 
 Task
-1. Første laver man programvindue med background, og lave en class.
-2. Lave firguren og bevægelse.
-3. Objecten skal kunne reflektere kanterne.
-4. Brug newtons lov med tyngdekræfter, mass og wind (ekstra funktion)
-5. Lave flere bolde og skal kunne ramme hinanden
-6. Lave en funktion som starter hele systemet forfra
+1. Første laver man programvindue med background, og lave en class. 10 min
+2. Lave firguren og bevægelse. 5 min
+3. Objecten skal kunne reflektere kanterne. 5 min
+4. Brug newtons lov med tyngdekræfter, mass og wind (ekstra funktion) 15 min
+5. Lave flere bolde og skal kunne ramme hinanden 20 min
+6. Lave en funktion som starter hele systemet forfra 15 min
 
 	Ekstra funktioner
-1. Lave figur om til 3D
-2. Farve skifter nå boldene rammer hinanden
-3. Bolde forsvinder efter et stykke tid
-4. Bold bliver langsommmere når de rammer vand
+1. Lave figur om til 3D 10 min
+2. Farve skifter nå boldene rammer hinanden 10 min
+3. Bolde forsvinder efter et stykke tid 10 min
+4. Bold bliver langsommmere når de rammer vand 10 min
 
 Med alle de ting som der skal laves kommer det til at tage ca 2-3 timer, det kommer an på om der opstår fejl.
 
