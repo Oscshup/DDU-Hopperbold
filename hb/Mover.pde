@@ -3,7 +3,7 @@ class Mover {
   PVector velocity;
   PVector acceleration;
   float mass;
-  float scl = 10;
+  float r = 30;
 
 
   Mover(float m, float x, float y) {
@@ -25,20 +25,41 @@ class Mover {
   }
 
   void checkEdges() {
-    if (location.x > width-mass||location.x < mass) { 
+    if (location.x + r/2 > width) { 
+      location.x = width - r/2;
       velocity.x *= -1;
+    } else if (location.x - r/2< 0) {
+      velocity.x *= -1;
+      location.x = r/2;
     }
-    if (location.y > height-mass||location.y < mass) { 
+
+    if (location.y + r/2> height) {
+      location.y = height - r/2;
+      velocity.y *= -1;
+    } else if (location.y - r/2 <0) {
+      location.y = r/2;
       velocity.y *= -1;
     }
   }
 
+  boolean hit(Mover c) {
+    float distance = dist(c.location.x, c.location.y, location.x, location.y);
+    float minidistance = c.r + r;
 
+    boolean thesame = (this == c);
+
+
+    if (minidistance > distance && !thesame) {
+      println("yeah");
+      return(true);
+    } 
+    return(false);
+  }
 
   void display() {
     noStroke();
     fill(150);
-    ellipse(location.x, location.y, mass*scl, mass*scl);
+    ellipse(location.x, location.y, r, r);
   }
 
   void BackGround() {
