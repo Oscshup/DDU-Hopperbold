@@ -6,10 +6,10 @@ b.)Det skal være muligt at lave flere bolde og de skal ramme hinanden. Backgrou
 c.)Udover det skal man kunne starte spillet forfra.
 
 Task
-1. Første laver man programvindue med background, og lave en class. 10 min
-2. Lave firguren og bevægelse. 5 min
-3. Objecten skal kunne reflektere kanterne. 5 min
-4. Brug newtons lov med tyngdekræfter, mass og wind (ekstra funktion) 15 min
+1. Første laver man programvindue med background, og lave en class. 10 min, Brugt 4 min
+2. Lave firguren og bevægelse. 5 min, brugt 5 min
+3. Objecten skal kunne reflektere kanterne. 5 min, brugt 5 min
+4. Brug newtons lov med tyngdekræfter, mass og wind (ekstra funktion) 15 min, brugt 20 min
 5. Lave flere bolde og skal kunne ramme hinanden 20 min
 6. Lave en funktion som starter hele systemet forfra 15 min
 

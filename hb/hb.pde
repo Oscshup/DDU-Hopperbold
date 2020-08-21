@@ -8,7 +8,7 @@ void setup() {
 
   move = new ArrayList<Mover>();
 
-  move.add(new Mover(random(0.1, 5), mouseX, mouseY));
+  move.add(new Mover(random(3, 5), mouseX, mouseY));
 }
 
 
@@ -28,12 +28,13 @@ void draw() {
     move.get(i).applyForce(gravity);
     move.get(i).update();
     move.get(i).checkEdges();
+   
     move.get(i).display();
-    move.get(i).BackGround();
+    //move.get(i).BackGround();
   }
 }
 
 void mouseClicked(){
 move.add(new Mover(random(0.1, 5), mouseX, mouseY));
 
-}
+} 

@@ -3,7 +3,7 @@ class Mover {
   PVector velocity;
   PVector acceleration;
   float mass;
-  float scl = 20;
+  float scl = 10;
 
 
   Mover(float m, float x, float y) {
@@ -34,10 +34,11 @@ class Mover {
   }
 
 
+
   void display() {
     noStroke();
     fill(150);
-    ellipse(location.x, location.y, scl, scl);
+    ellipse(location.x, location.y, mass*scl, mass*scl);
   }
 
   void BackGround() {

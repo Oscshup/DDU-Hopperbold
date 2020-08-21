@@ -37,7 +37,8 @@ class Mover {
 
   void display() {
     noStroke(); 
-    fill(100, 100, 100); 
-    ellipse(location.x, location.y, 20, 20);
+    fill(0); 
+    ellipse(location.x, location.y, 20,20);
+    
   }
 }

@@ -1,8 +1,8 @@
-Mover[] move = new Mover[10];
+Mover[] move = new Mover[30];
 float mass;
 
 void setup() {
-  size(800, 800);
+  size(800, 800, P3D);
   frameRate(60);
 
   for (int i = 0; i < move.length; i++) {
