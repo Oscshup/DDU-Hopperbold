@@ -4,6 +4,7 @@ class Mover {
   PVector acceleration;
   float mass;
   float r = 30;
+  float life, colorchange;
 
 
   Mover(float m, float x, float y) {
@@ -11,6 +12,7 @@ class Mover {
     location = new PVector(x, y);
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
+    life = 100;
   }
 
   void applyForce(PVector force) {
@@ -51,20 +53,35 @@ class Mover {
 
     if (minidistance > distance && !thesame) {
       println("yeah");
+      colorchange = 255;
       return(true);
     } 
     return(false);
   }
 
+
+  boolean finished() {
+    // Balls fade out
+    life--;
+    if (life < 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
   void display() {
+    // Display the circle
+    fill(colorchange++, 0, 0, life);
     noStroke();
-    fill(150);
     ellipse(location.x, location.y, r, r);
   }
 
   void BackGround() {
+    fill(0, 255, 0);
     for (int i = 0; i < 10; i++) {
-      ellipse(random(0, 800), random(700, 800), 60, 60);
+      //ellipse(random(0, 800), random(700, 800), 60, 60);
     }
   }
 }
