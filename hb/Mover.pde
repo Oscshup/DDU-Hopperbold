@@ -50,6 +50,7 @@ class Mover {
 
     boolean thesame = (this == c);
 
+    colorchange = 0;
 
     if (minidistance > distance && !thesame) {
       println("yeah");
@@ -77,6 +78,4 @@ class Mover {
     noStroke();
     ellipse(location.x, location.y, r, r);
   }
-
-  
 }

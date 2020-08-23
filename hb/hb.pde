@@ -52,6 +52,7 @@ void draw() {
   //The objects can be pulled out of an ArrayList with get()
   for (int i = 0; i < move.size(); i++) {
 
+
     if (key == 'v') {
       move.get(i).applyForce(wind);
 
@@ -67,8 +68,6 @@ void draw() {
     move.get(i).display();
     ground[i].hills();
   }
-
-  
 }
 
 //Added more objects form the ArrayList
@@ -76,13 +75,8 @@ void mouseClicked() {
   move.add(new Mover(random(1, 5), mouseX, mouseY));
 } 
 
-void keyPressed() {
-  if (key == 'r' ) {
-    println("reset");
-    resetdata();
+void keyPressed() { 
+  if (key == 'r') {
+    move.clear();
   }
-}
-
-void resetdata() {
-  smooth();
 }
