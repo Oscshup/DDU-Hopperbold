@@ -1,23 +1,41 @@
-ArrayList<Mover> move;
+//avriables
 float mass;
-float c = 255;
+int dirt = 40;
+
+
+ArrayList<Mover> move = new ArrayList<Mover>();
+
+Ground[] ground = new Ground[dirt];
+
 
 void setup() {
   size(800, 800);
   frameRate(60);
 
-  move = new ArrayList<Mover>();
-
+  //Objects can be added to ArrayList with add()
   move.add(new Mover(random(3, 5), mouseX, mouseY));
-  
-  
-  draw();
+
+  // Calculate ground peak heights
+  float[] groundpeak = new float[dirt+1];
+  //This make the ground peak heights between to random nubmber
+  for (int i=0; i<groundpeak.length; i++) {
+    groundpeak[i] = random(height-130, height-80);
+  }
+
+  /* Now we need to make a float value required for dirt width 
+   calculations so the ground spans the entire 
+   display window, regardless of dirt number.*/
+  float d = dirt;
+  for (int i=0; i<dirt; i++) {
+    ground[i]  = new Ground(width/d*i, groundpeak[i], width/d*(i+1), groundpeak[i+1], dirt);
+  }
 }
+
 
 
 void draw() {
   noStroke();
- //background(c);
+  background(#87ceeb);
 
   PVector wind = new PVector(0.7, 0);
   PVector gravity = new PVector(0, 0.1);
@@ -31,7 +49,7 @@ void draw() {
   }
 
 
-
+  //The objects can be pulled out of an ArrayList with get()
   for (int i = 0; i < move.size(); i++) {
 
     if (key == 'v') {
@@ -46,11 +64,14 @@ void draw() {
 
     move.get(i).update();
     move.get(i).checkEdges();
-    move.get(i).BackGround();
     move.get(i).display();
+    ground[i].hills();
   }
+
+  
 }
 
+//Added more objects form the ArrayList
 void mouseClicked() {
   move.add(new Mover(random(1, 5), mouseX, mouseY));
 } 
@@ -62,8 +83,6 @@ void keyPressed() {
   }
 }
 
-void resetdata(){
+void resetdata() {
   smooth();
-background(c);
-
 }

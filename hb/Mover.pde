@@ -36,7 +36,7 @@ class Mover {
     }
 
     if (location.y + r/2> height) {
-      location.y = height - r/2;
+      location.y = height ;
       velocity.y *= -1;
     } else if (location.y - r/2 <0) {
       location.y = r/2;
@@ -73,15 +73,10 @@ class Mover {
 
   void display() {
     // Display the circle
-    fill(colorchange++, 0, 0, life);
+    fill(colorchange, 100, 0, life);
     noStroke();
     ellipse(location.x, location.y, r, r);
   }
 
-  void BackGround() {
-    fill(0, 255, 0);
-    for (int i = 0; i < 10; i++) {
-      //ellipse(random(0, 800), random(700, 800), 60, 60);
-    }
-  }
+  
 }
