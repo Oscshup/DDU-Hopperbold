@@ -1,6 +1,6 @@
 //avriables
 float mass;
-int dirt = 40;
+int dirt = 30;
 int quantityBall = 10;
 
 Mover[] move = new Mover[quantityBall];
@@ -61,6 +61,10 @@ void draw() {
     b.applyForce(gravity);
     b.update();
     b.checkEdges();
+     
+     for (int i=0; i<dirt; i++) {
+    b.checkGroundCollision(ground[i]);
+  }
   }
 
   for (int i = 0; i < quantityBall; i++) {
