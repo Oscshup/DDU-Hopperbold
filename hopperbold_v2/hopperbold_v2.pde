@@ -3,10 +3,6 @@ float mass;
 int dirt = 40;
 int quantityBall = 10;
 
-//ArrayList <Mover> move = new ArrayList<Mover>();
-
-
-
 Mover[] move = new Mover[quantityBall];
 Ground[] ground = new Ground[dirt];
 
@@ -49,13 +45,10 @@ void draw() {
 
   for (Mover b1 : move) {
     for (Mover b2 : move) {
-      if (b1.hit(b2) == true) {
-        
+      if (b1.hit(b2)) {
       }
     }
   }
-
- 
 
   for (Mover b : move) {
     if (key == 'v') {
@@ -68,48 +61,17 @@ void draw() {
     b.applyForce(gravity);
     b.update();
     b.checkEdges();
-    
   }
-   
-   for (int i = 0; i < quantityBall; i++) {
+
+  for (int i = 0; i < quantityBall; i++) {
     move[i].display();
   } 
-  
-  for (Ground g: ground){
-  //g.hills();
+
+  for (Ground g : ground) {
+    //g.hills();
   }
-
-
-
-
-
-
-  //The objects can be pulled out of an ArrayList with get()
-  /*for (int i = 0; i < move.size(); i++) {
-   
-   
-   if (key == 'v') {
-   move.get(i).applyForce(wind);
-   
-   if (move.get(i).finished()) {
-   println("død");
-   //move.get(i).remove();
-   }
-   }
-   move.get(i).applyForce(gravity);
-   
-   move.get(i).update();
-   move.get(i).checkEdges();
-   move.get(i).display();
-   
-   //ground[i].hills();
-   }*/
 }
 
-//Added more objects form the ArrayList
-/*void mouseClicked() {
- move.add(new Mover(random(1, 5), mouseX, mouseY));
- } */
 
 void keyPressed() { 
   if (key == 'r') {
