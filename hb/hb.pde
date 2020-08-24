@@ -1,36 +1,15 @@
 //avriables
 float mass;
-int dirt = 40;
-int quantityBall = 10;
-
-//ArrayList <Mover> move = new ArrayList<Mover>();
-
+int quantityBall = 5;
 
 
 Mover[] move = new Mover[quantityBall];
-Ground[] ground = new Ground[dirt];
+
 
 
 void setup() {
   size(800, 800);
-  frameRate(60);
-
-  // Calculate ground peak heights
-  float[] groundpeak = new float[dirt+1];
-  //This make the ground peak heights between to random nubmber
-  for (int i=0; i<groundpeak.length; i++) {
-    groundpeak[i] = random(height-130, height-80);
-  }
-
-  /* Now we need to make a float value required for dirt width 
-   calculations so the ground spans the entire 
-   display window, regardless of dirt number.*/
-  float d = dirt;
-  for (int i=0; i<dirt; i++) {
-    ground[i]  = new Ground(width/d*i, groundpeak[i], width/d*(i+1), groundpeak[i+1], dirt);
-  }
-
-
+  frameRate(30);
 
   //Objects can be added to ArrayList with add()
   for (int i = 0; i < quantityBall; i++) { 
@@ -49,13 +28,54 @@ void draw() {
 
   for (Mover b1 : move) {
     for (Mover b2 : move) {
-      if (b1.hit(b2) == true) {
-        
+      if (b1.hit(b2) ) {
+
+        //Bestem afstanden
+        float distance = b1.location.dist(b2.location);
+        //Hvor meget er de over hinanden?
+        float  overlap = 0.5 * (distance - b1.d - b2.d);
+        //flytter bolden væk fra hinanden 
+        float dx =  overlap * (b1.location.x - b2.location.x) / distance;
+        float dy = overlap * (b1.location.y - b2.location.y) / distance;
+
+        b1.location.x -= dx ;
+        b1.location.y -= dy;
+
+        b2.location.x += dx ;
+        b2.location.y += dy;
+
+
+        PVector b1coordinate = b1.location.copy();
+        PVector b2coordinate = b2.location.copy();
+
+
+        //Find vektoren mellem de to kolliderende kugler som svarer til cirkelbue på kontaktfladen
+        PVector cirkelbue = b1coordinate.sub(b2coordinate).normalize();
+
+        //Find tangenten til de to cirkler
+        PVector tangent = new PVector(-cirkelbue.y, cirkelbue.x);
+
+        //Dette skal hjælpe med opdel begge hastigheder i x og y retning ved at prikke vektorerne med cirkelbue og tangenten.
+        //cirkelbue er den vigtig, idet det forventes at kuglerne beholder tangenthastigheden. Så dette er formel til at give hastighed til cirkel når de rammer hinanden
+        float dpTan1 = b1.velocity.x * tangent.x + b1.velocity.y * tangent.y; 
+        float dpTan2 = b2.velocity.x * tangent.x + b2.velocity.y * tangent.y;
+        float dpNorm1 = b1.velocity.x * cirkelbue.x + b1.velocity.y * cirkelbue.y; 
+        float dpNorm2 = b2.velocity.x * cirkelbue.x + b2.velocity.y * cirkelbue.y;
+
+        //Nu kan vi bruge formel 
+        float v1 = ((b1.masse - b2.masse) * dpNorm1 + 2.0f * b2.masse * dpNorm2) / (b1.masse + b2.masse);
+        float v2 = (2 * b1.masse * dpNorm1 + (b2.masse - b1.masse) * dpNorm2) / (b1.masse + b2.masse);
+
+        b1.velocity.x = tangent.x * dpTan1 + cirkelbue.x * v1;
+        b1.velocity.y = tangent.y * dpTan1 + cirkelbue.y * v1;
+
+        b2.velocity.x = tangent.x * dpTan2 + cirkelbue.x * v2;
+        b2.velocity.y = tangent.y * dpTan2 + cirkelbue.y * v2;
       }
     }
   }
 
- 
+
 
   for (Mover b : move) {
     if (key == 'v') {
@@ -68,48 +88,13 @@ void draw() {
     b.applyForce(gravity);
     b.update();
     b.checkEdges();
-    
   }
-   
-   for (int i = 0; i < quantityBall; i++) {
+
+  for (int i = 0; i < quantityBall; i++) {
     move[i].display();
-  } 
-  
-  for (Ground g: ground){
-  //g.hills();
   }
-
-
-
-
-
-
-  //The objects can be pulled out of an ArrayList with get()
-  /*for (int i = 0; i < move.size(); i++) {
-   
-   
-   if (key == 'v') {
-   move.get(i).applyForce(wind);
-   
-   if (move.get(i).finished()) {
-   println("død");
-   //move.get(i).remove();
-   }
-   }
-   move.get(i).applyForce(gravity);
-   
-   move.get(i).update();
-   move.get(i).checkEdges();
-   move.get(i).display();
-   
-   //ground[i].hills();
-   }*/
 }
 
-//Added more objects form the ArrayList
-/*void mouseClicked() {
- move.add(new Mover(random(1, 5), mouseX, mouseY));
- } */
 
 void keyPressed() { 
   if (key == 'r') {

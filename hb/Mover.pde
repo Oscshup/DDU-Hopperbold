@@ -2,13 +2,13 @@ class Mover {
   PVector location;
   PVector velocity;
   PVector acceleration;
-  float mass;
-  float r =50;
+  float masse;
+  float d = 25f;
   float life, colorchange;
 
 
   Mover(float m, float x, float y) {
-    mass = m;
+    masse = m;
     location = new PVector(x, y);
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
@@ -16,7 +16,7 @@ class Mover {
   }
 
   void applyForce(PVector force) {
-    PVector f = PVector.div(force, mass);
+    PVector f = PVector.div(force, masse);
     acceleration.add(f);
   }
 
@@ -27,26 +27,26 @@ class Mover {
   }
 
   void checkEdges() {
-    if (location.x + r/2 > width) { 
-      location.x = width - r/2;
+    if (location.x + d/2 > width) { 
+      location.x = width - d/2;
       velocity.x *= -1;
-    } else if (location.x - r/2< 0) {
+    } else if (location.x - d/2< 0) {
       velocity.x *= -1;
-      location.x = r/2;
+      location.x = d/2;
     }
 
-    if (location.y + r/2> height) {
-      location.y = height ;
+    if (location.y + d/2> height) {
+      location.y = height - d/2;
       velocity.y *= -1;
-    } else if (location.y - r/2 <0) {
-      location.y = r/2;
+    } else if (location.y - d/2 <0) {
+      location.y = d/2;
       velocity.y *= -1;
     }
   }
 
   boolean hit(Mover c) {
     float distance = dist(c.location.x, c.location.y, location.x, location.y);
-    float minidistance = c.r + r;
+    float minidistance = c.d + d;
 
     boolean thesame = (this == c);
 
@@ -72,10 +72,15 @@ class Mover {
   }
 
 
+void hill(){
+
+
+}
+
   void display() {
     // Display the circle
     fill(colorchange, 100, 0, life);
     noStroke();
-    ellipse(location.x, location.y, r, r);
+    ellipse(location.x, location.y, d*2, d*2);
   }
 }
