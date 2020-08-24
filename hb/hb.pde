@@ -1,6 +1,6 @@
 //avriables
 float mass;
-int quantityBall = 5;
+int quantityBall = 6;
 
 
 Mover[] move = new Mover[quantityBall];

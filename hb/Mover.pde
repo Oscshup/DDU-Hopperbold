@@ -3,7 +3,7 @@ class Mover {
   PVector velocity;
   PVector acceleration;
   float masse;
-  float d = 25f;
+  float d = 15;
   float life, colorchange;
 
 
@@ -31,8 +31,8 @@ class Mover {
       location.x = width - d/2;
       velocity.x *= -1;
     } else if (location.x - d/2< 0) {
-      velocity.x *= -1;
       location.x = d/2;
+      velocity.x *= -1;
     }
 
     if (location.y + d/2> height) {
