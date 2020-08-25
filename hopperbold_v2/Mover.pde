@@ -24,7 +24,7 @@ class Mover {
   void update() {
     velocity.add(acceleration);
     location.add(velocity);
-    acceleration.mult(0.98);
+    acceleration.mult(0.6);
   }
 
   void checkEdges() {

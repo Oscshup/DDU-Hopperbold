@@ -15,7 +15,7 @@ void setup() {
   float[] groundpeak = new float[dirt+1];
   //This make the ground peak heights between to random nubmber
   for (int i=0; i<groundpeak.length; i++) {
-    groundpeak[i] = random(height-130, height-100);
+    groundpeak[i] = random(height-100, height-50);
   }
 
   /* Now we need to make a float value required for dirt width 
@@ -40,13 +40,13 @@ void draw() {
   noStroke();
   background(#87ceeb);
 
-  PVector wind = new PVector(0.7, 0);
+
   PVector gravity = new PVector(0, 0.1);
 
   for (Mover b1 : move) {
     for (Mover b2 : move) {
       if (b1.hit(b2)) {
-         
+
         //Bestem afstanden
         float distance = b1.location.dist(b2.location);
         //Hvor meget er de over hinanden?
@@ -93,20 +93,13 @@ void draw() {
   }
 
   for (Mover b : move) {
-    if (key == 'v') {
-      b.applyForce(wind);
-
-      if (b.finished()) {
-        println("død");
-      }
-    }
     b.applyForce(gravity);
     b.update();
     b.checkEdges();
-     
-     for (int i=0; i<dirt; i++) {
-    b.checkGroundCollision(ground[i]);
-  }
+
+    for (int i=0; i<dirt; i++) {
+      b.checkGroundCollision(ground[i]);
+    }
   }
 
   for (int i = 0; i < quantityBall; i++) {
@@ -120,6 +113,16 @@ void draw() {
 
 
 void keyPressed() { 
+  PVector wind = new PVector(0.7, 0);
+  for (Mover bv : move) {
+
+    bv.applyForce(wind);
+
+    if (bv.finished()) {
+      println("død");
+    }
+  }
+
   if (key == 'r') {
     frameCount = -1;
   }
