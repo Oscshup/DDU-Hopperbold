@@ -1,6 +1,7 @@
 //avriables
+PImage img; 
 float mass;
-int dirt = 50;
+int dirt = 5;
 int quantityBall = 10;
 
 Mover[] move = new Mover[quantityBall];
@@ -8,14 +9,14 @@ Ground[] ground = new Ground[dirt];
 
 
 void setup() {
-  size(800, 800);
-  frameRate(60);
+  size(820, 546);
+  frameRate(120);
 
   // Calculate ground peak heights
   float[] groundpeak = new float[dirt+1];
   //This make the ground peak heights between to random nubmber
   for (int i=0; i<groundpeak.length; i++) {
-    groundpeak[i] = random(height-100, height-50);
+    groundpeak[i] = random(height-200, height-50);
   }
 
   /* Now we need to make a float value required for dirt width 
@@ -30,8 +31,10 @@ void setup() {
 
   //Objects can be added to ArrayList with add()
   for (int i = 0; i < quantityBall; i++) { 
-    move[i] = new Mover(random(3, 5), random(100, width-100), random(100, height-300));
+    move[i] = new Mover(random(0.5, 5), random(100, width-100), random(100, height-300));
   }
+
+  img = loadImage("fire.jpg");
 }
 
 
@@ -40,6 +43,7 @@ void draw() {
   noStroke();
   background(#87ceeb);
 
+  //image(img, 0, 0, width, height);
 
   PVector gravity = new PVector(0, 0.1);
 
@@ -50,7 +54,7 @@ void draw() {
         //Bestem afstanden
         float distance = b1.location.dist(b2.location);
         //Hvor meget er de over hinanden?
-        float  overlap = 1 * (distance - b1.d - b2.d);
+        float  overlap = 0.9 * (distance - b1.d - b2.d);
         //flytter bolden væk fra hinanden 
         float dx =  overlap * (b1.location.x - b2.location.x) / distance;
         float dy = overlap * (b1.location.y - b2.location.y) / distance;
@@ -79,8 +83,8 @@ void draw() {
         float dpNorm1 = b1.velocity.x * cirkelbue.x + b1.velocity.y * cirkelbue.y; 
         float dpNorm2 = b2.velocity.x * cirkelbue.x + b2.velocity.y * cirkelbue.y;
 
-        //Nu kan vi bruge formel 
-        float v1 = ((b1.masse - b2.masse) * dpNorm1 + 2.0f * b2.masse * dpNorm2) / (b1.masse + b2.masse);
+        //Nu kan vi bruge formel fra Elastic collision: https://en.wikipedia.org/wiki/Elastic_collision
+        float v1 = ((b1.masse - b2.masse) * dpNorm1 + 2.0 * b2.masse * dpNorm2) / (b1.masse + b2.masse);
         float v2 = (2 * b1.masse * dpNorm1 + (b2.masse - b1.masse) * dpNorm2) / (b1.masse + b2.masse);
 
         b1.velocity.x = tangent.x * dpTan1 + cirkelbue.x * v1;
@@ -111,6 +115,9 @@ void draw() {
   }
 }
 
+void mouseClicked() {
+  //move.add(new Mover(random(3, 5), mouseX,mouseY);
+}
 
 void keyPressed() { 
   PVector wind = new PVector(0.7, 0);

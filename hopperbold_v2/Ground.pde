@@ -20,6 +20,8 @@ class Ground {
   
   fill(#9b7653);
   beginShape();
+  
+  
   for (int i=0; i<dirt; i++) {
     vertex(ground[i].x1, ground[i].y1);
     vertex(ground[i].x2, ground[i].y2);

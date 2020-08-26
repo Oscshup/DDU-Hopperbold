@@ -13,7 +13,7 @@ class Mover {
     location = new PVector(x, y);
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
-    life = 100;
+    life = 200;
   }
 
   void applyForce(PVector force) {
@@ -51,7 +51,7 @@ class Mover {
 
     boolean thesame = (this == c);
 
-    colorchange = 0;
+    
 
     if (minidistance > distance && !thesame) {
       println("yeah");
@@ -82,11 +82,11 @@ class Mover {
 
   void checkGroundCollision(Ground groundSegment) {
 
-    // Get difference between orb and ground
+    // Bestem aftand mellem bold og jorden
     float deltaX = location.x - groundSegment.x;
     float deltaY = location.y - groundSegment.y;
 
-    // Precalculate trig values
+    //Beregn trigonometri
     float cosine = cos(groundSegment.rot);
     float sine = sin(groundSegment.rot);
 
@@ -97,16 +97,15 @@ class Mover {
     float velocityXTemp = cosine * velocity.x + sine * velocity.y;
     float velocityYTemp = cosine * velocity.y - sine * velocity.x;
 
-    /* Ground collision - check for surface 
-     collision and also that orb is within 
-     left/rights bounds of ground segment */
+    /* Dette skal hjælpe med at tjekke overfladen 
+    og at bolden venstre/højere bounds jorden*/
     if (groundYTemp > -d &&
       location.x > groundSegment.x1 &&
       location.x < groundSegment.x2 ) {
-      // keep orb from going into ground
+      //stopper for bolden ikke går igennem jorden
       groundYTemp = -d;
-      // bounce and slow down orb
-      velocityYTemp *= -1.0;
+      //Sænke bounce og hastighed på bolden
+      velocityYTemp *= -0.9;
       velocityYTemp *= damping;
     }
 
